@@ -1,3 +1,4 @@
+<%@page import="persons.InsertHelper"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -13,7 +14,7 @@
 		<%@ page import="persons.DBtest" %>
 		<%@ page import="java.sql.SQLException" %>
 		<%@ page import="java.io.PrintWriter" %>
-		<%@ page import="java.sql.ResultSet;" %>
+		<%@ page import="java.sql.ResultSet" %>
 		<%
 		
 			persons.DBtest viewer=null;
@@ -46,7 +47,8 @@
 					<td> <%= rs.getObject(5) %> </td>
 					<tr>
 					<%
-				}%>
+				}
+				rs.close();%>
 								
 				</table>
 		<%
@@ -60,8 +62,9 @@
 		%>
 	</div>
 	<div>
-		<form action="">
-			Enter ID ( uniq number): <input type=text name = id>
+		<form action="IH" method=post>
+			<p>Для редактирования введите такой же Id редактируемого, для удаления введите только Id</p>
+			Enter ID ( uniq number): <input type=text name = id>			
 			Enter first name: <input type=text name = firstName><br/>
 			Enter second name: <input type=text name = secondName>
 			Enter address: <input type=text name = address><br/>

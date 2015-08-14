@@ -8,9 +8,58 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action=PersonsServlet method =Get >
+	<div>
+		<%@ page import="java.util.*" %>
+		<%@ page import="javax.sql.*" %>
+		<%@ page import="persons.DBtest" %>
+		<%@ page import="java.sql.SQLException" %>
+		<%@ page import="java.io.PrintWriter" %>
+		<%@ page import="java.sql.ResultSet;" %>
+		<%
 		
-		<input type = Submit value = "Войти">
-	</form>
+			persons.DBtest viewer=null;
+			try {
+				viewer = new DBtest();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				System.out.println("problems with db test");
+				e1.printStackTrace();
+			}
+			// OutputStream out = response.getOutputStream();
+			// response.setContentType("text/html; charset=UTF-8");
+			// PrintWriter pw = response.getWriter();
+			
+			ResultSet rs = viewer.getResultSet();
+			if(rs == null){
+				System.out.println("rs == nul");
+			}
+			try {
+		%>
+				<table>
+		<%
+				while(rs.next()){
+					%>
+					<tr>
+					<td> <%= rs.getObject(1) %> </td>
+					<td> <%= rs.getObject(2) %> </td>
+					<td> <%= rs.getObject(3) %> </td>
+					<td> <%= rs.getObject(4) %> </td>
+					<td> <%= rs.getObject(5) %> </td>
+					<tr>
+					<%
+				}
+				rs.close();%>
+								
+				</table>
+		<%
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (Exception e){
+				e.printStackTrace();
+			}
+		
+		%>
+	</div>
 </body>
 </html>

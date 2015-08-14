@@ -14,11 +14,46 @@ public class DBtest {
 	public static Connection conn;
 	private static Statement stmt = null;        
     private static ResultSet rs = null;
+    private static DBtest instance = null;
 
     public ResultSet getResultSet(){
+    	
     	return rs;
     }
-    
+
+    public static void insert(String id,String firstName, String secondName, String address, String dateOfBirth){
+    	try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mytables","root","root");
+			stmt = conn.createStatement();
+			PreparedStatement ps = conn.prepareStatement("insert into persons values(null, ?, ?, ?, ?)");
+			
+			ps.setString(1, firstName);
+			ps.setString(2, secondName);
+			ps.setString(3, address);
+			
+			String dob = dateOfBirth;
+			Date utilDate = null;
+			try {
+				utilDate = new SimpleDateFormat("yyyy-MM-dd").parse(dob);
+			} catch (ParseException e) {
+				System.out.println("error while parisng date");
+			}
+			// because PreparedStatement#setDate(..) expects a java.sql.Date argument
+			java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+			
+			ps.setDate(4, sqlDate);
+			ps.execute();
+		
+			rs = stmt.executeQuery("select * from persons");
+		} catch (SQLException e) {
+			System.out.println("Unable to connect to database from isert method");
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			System.out.println("Unable to load jdbc driver");
+			e.printStackTrace();
+		}
+    }
     
 	public DBtest() throws SQLException {
 		// TODO Auto-generated method stub
@@ -62,7 +97,7 @@ public class DBtest {
 		ps.execute();
 		**/
 		
-		//conn.close();
+
 	}
 
 }
