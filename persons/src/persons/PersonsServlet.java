@@ -25,7 +25,7 @@ public class PersonsServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// проверяем логин и пароль
 		String login = request.getParameter("login");
 		String pass = request.getParameter("password");
 		if(login.equals("admin") && pass.equals("admin")){

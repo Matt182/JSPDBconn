@@ -86,7 +86,8 @@
 	<div>
 		<form action="IH" method=post>
 			<p>Для редактирования введите такой же Id редактируемого, для удаления достаточно ввести только Id</p>
-			<input type=hidden id =func name = func >
+			<input type=hidden id =func name = func > <!-- невидимое поле которое принимает парамтр delete или edit
+															в зависимости от того какая кнопка нажата  -->
 			<table>
 				<tr>
 					<td>Enter ID: </td><td><input type=text name = id></td>			
@@ -108,7 +109,6 @@
 			</table>
 		</form>
 	</div>
-	Administration view will be here
-	<div></div>
+
 </body>
 </html>
