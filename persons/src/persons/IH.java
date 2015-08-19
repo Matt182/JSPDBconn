@@ -14,13 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 public class IH extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
-	static String sqlQuery;
-	public static void doJob(String id, String firstName, String secondName, String address, String dateOfBirth){
-		sqlQuery = "insert into persons values("+ id + ", " +firstName + ", " +secondName + ", " +address + ", " +dateOfBirth +")";	
-	}
-	public static String getQuery(){
-		return sqlQuery;
-	}
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -43,13 +36,28 @@ public class IH extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		DBtest.insert(request.getParameter("id"),request.getParameter("firstName"),request.getParameter("secondName"),
-				request.getParameter("address"),request.getParameter("dateOfBirth"));
-		try {
-			response.sendRedirect("/persons/DataBase.jsp");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		System.out.println(request.getParameter("func"));
+		
+		if(request.getParameter("func").equals("edit")){
+			DBtest.insert(request.getParameter("id"),request.getParameter("firstName"),request.getParameter("secondName"),
+					request.getParameter("address"),request.getParameter("dateOfBirth"));
+			try {
+				response.sendRedirect("/persons/DataBase.jsp");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return;
+		}
+		
+		if(request.getParameter("func").equals("delete")){
+			DBtest.delete(request.getParameter("id"));
+			try {
+				response.sendRedirect("/persons/DataBase.jsp");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
