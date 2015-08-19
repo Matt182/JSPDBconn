@@ -29,15 +29,15 @@ public class DBtest {
 			//conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mytables","root","root");
     		stmt = conn.createStatement();
 			ResultSet identics = stmt.executeQuery("select id from persons");
-			
+			ids.clear();
 			while (identics.next()){
 				ids.add(identics.getRow());
 			}
-    		
-    		if(id.equals("")){
-    			stmt.execute("insert into persons values (null,'" +firstName + "','" +secondName+ "','" +address + "','" +dateOfBirth + "')");   			
-    		} else if(ids.contains(Integer.parseInt(id))){
+
+    		if(!(id.equals("")) && ids.contains(Integer.parseInt(id))){
     			stmt.execute("update persons set firstName ='" +firstName + "', secondName ='" +secondName+ "', adress ='" +address + "',dateOfBirth ='" +dateOfBirth + "' where id ="+id);
+    		} else {
+    			stmt.execute("insert into persons values (null,'" +firstName + "','" +secondName+ "','" +address + "','" +dateOfBirth + "')");
     		}
 			//stmt = conn.createStatement();
 			//stmt.execute("insert into persons values (" + id + ",'" +firstName + "','" +secondName+ "','" +address + "','" +dateOfBirth + "')");

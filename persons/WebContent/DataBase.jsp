@@ -4,6 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="style.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
@@ -46,27 +47,27 @@
 			}
 			try {
 		%>
-				<table>
-				<tr>
+				<table class="dataBase">
+				<tr class="dataBaseR">
 		<%
 			for (int i  = 1;i <= rs.getMetaData().getColumnCount(); i++){
 				%>
 
-					<th><%=rs.getMetaData().getColumnName(i) %></th>
+					<th class="dataBaseH"><%=rs.getMetaData().getColumnName(i) %></th>
 
 				<%
 			}%>
-				</tr>
+				</tr >
 			<%
 				while(rs.next()){
 					%>
-					<tr>
-					<td> <%= rs.getObject(1) %> </td>
-					<td> <%= rs.getObject(2) %> </td>
-					<td> <%= rs.getObject(3) %> </td>
-					<td> <%= rs.getObject(4) %> </td>
-					<td> <%= rs.getObject(5) %> </td>
-					<tr>
+					<tr class="dataBaseR">
+					<td class="dataBaseD"> <%= rs.getObject(1) %> </td>
+					<td class="dataBaseD"> <%= rs.getObject(2) %> </td>
+					<td class="dataBaseD"> <%= rs.getObject(3) %> </td>
+					<td class="dataBaseD"> <%= rs.getObject(4) %> </td>
+					<td class="dataBaseD"> <%= rs.getObject(5) %> </td>
+					</tr>
 					<%
 				}
 				rs.close();%>
@@ -86,13 +87,25 @@
 		<form action="IH" method=post>
 			<p>Для редактирования введите такой же Id редактируемого, для удаления достаточно ввести только Id</p>
 			<input type=hidden id =func name = func >
-			Enter ID ( uniq number): <input type=text name = id>			
-			Enter first name: <input type=text name = firstName><br/>
-			Enter second name: <input type=text name = secondName>
-			Enter address: <input type=text name = address><br/>
-			Enter date of birth (YYYY-MM-DD): <input type=text name = dateOfBirth>
-			<input type=submit value='Add' onclick=update();>
-			<input type=submit value='Delete' onclick=del();>
+			<table>
+				<tr>
+					<td>Enter ID: </td><td><input type=text name = id></td>			
+					<td>Enter first name: </td><td><input type=text name = firstName></td>
+				</tr>
+				<tr>
+					<td>Enter second name: </td><td><input type=text name = secondName></td>
+					<td>Enter address: </td><td><input type=text name = address></td>
+				</tr>
+				<tr>
+					<td>Enter date of birth (YYYY-MM-DD): </td><td><input type=text name = dateOfBirth></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td><td><input type=submit value='Add' onclick=update(); id='button'></td>
+					<td><input type=submit value='Delete' onclick=del(); id='button'></td><td></td>
+				</tr>
+			</table>
 		</form>
 	</div>
 	Administration view will be here
